@@ -13,7 +13,6 @@
 <body  style="background-color: rgb(23, 71, 131)">
     <div class="container">
         <br>
-        
         <div class="row">
             <div class="col-6">
                 <h1 class="text-light text-align:start" >Note Pad!
@@ -23,8 +22,7 @@
 
             <div class="col-6">
                 <div class="d-flex justify-content-end">
-                    <button class="btn botoes btn-light">Sing in</button>
-                    <button class="btn botoes btn-light">Sing up</button>
+                    <button id="removeData" class="btn botoes btn-danger">Apagar dados</button>
                     <br>
                 </div> 
             </div>
@@ -37,12 +35,13 @@
                 <div class="row d-flex justify-content-end">
                     
                         <button class="btn btn-light" data-toggle="modal" data-target="#addTask">
-                            <img src="public/img/icons/add.png" width="20px" height="20px" alt="adicionar nova tarefa"></button>    
-                        <button class="btn btn-light" data-toggle="modal" data-target="#addTask">
-                            <img src="public/img/icons/seach.png" width="20px" height="20px" alt="procurar nova tarefa">
-                        </button>      
+                            <img src="public/img/icons/add.png" width="20px" height="20px" alt="adicionar nova tarefa">
+                        </button>    
+                        
+                        <button class="btn btn-light" data-toggle="modal" data-target="">
+                            <img id="refresh" src="public/img/icons/refresh.png" width="20px" height="20px" alt="procurar nova tarefa"></button>  
+                        <input  id="task-search" type="text" name="search" class="form-control" style="width: 200px;">    
                 </div>
-
                 <br>
                     <div id="livro" class="list-group" style="position: relative; max-height: 530px; overflow: auto;" >
                     </div>    
