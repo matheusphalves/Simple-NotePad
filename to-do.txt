@@ -1,0 +1,8 @@
+A proposta é um sistema “to-do” simples, que ajuda o usuário a controlar suas tarefas, coisas para fazer.
+
+O usuário acessa/instala e seus dados ficam salvo
+Cada tarefa pode ter data para iniciar terminar
+A tela inicial lista as tarefas por fazer
+O usuário pode facilmente marcar uma tarefa como concluída
+Deve ser fácil trocar a ordem das tarefas na lista, colocando no alto as mais importantes
+Tarefas atrasadas devem ficar em destaque na lista

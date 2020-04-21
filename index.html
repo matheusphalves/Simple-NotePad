@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note pad!</title>
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/site.css">
+    <link rel="shortcut icon" href="public/img/icons/favicon.ico" />
+    <script src="public/js/bootstrap.bundle.min.js"></script>
+</head>
+<body  style="background-color: rgb(23, 71, 131)">
+    <div class="container">
+        <br>
+        
+        <div class="row">
+            <div class="col-6">
+                <h1 class="text-light text-align:start" >Note Pad!
+                    <img src="public/img/icons/logo.png" style="float: left;" width="60px" height="60px" alt="">
+                </h1>
+            </div>
+
+            <div class="col-6">
+                <div class="d-flex justify-content-end">
+                    <button class="btn botoes btn-light">Sing in</button>
+                    <button class="btn botoes btn-light">Sing up</button>
+                    <br>
+                </div> 
+            </div>
+        </div>
+            
+    
+        <div class="row main">
+            <div class="col-sm-3 items">
+                <h3 class="text-dark d-flex font-weight-bold">Lista de tarefas </h3>
+                <div class="row d-flex justify-content-end">
+                    
+                        <button class="btn btn-light" data-toggle="modal" data-target="#addTask">
+                            <img src="public/img/icons/add.png" width="20px" height="20px" alt="adicionar nova tarefa"></button>    
+                        <button class="btn btn-light" data-toggle="modal" data-target="#addTask">
+                            <img src="public/img/icons/seach.png" width="20px" height="20px" alt="procurar nova tarefa">
+                        </button>      
+                </div>
+
+                <br>
+                    <div id="livro" class="list-group" style="position: relative; max-height: 530px; overflow: auto;" >
+                    </div>    
+            </div>
+
+            <div class="col-sm-9">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div id="tarefa" >
+                            <h2 id="titleTask" class="text-primary"></h2>
+                            <h6 id= "dateTask" class="text-dark"></h6>
+                        </div>
+                    </div>
+    
+                    <div class="col-6 d-flex justify-content-end">
+                        <div id="opcoes">
+                        </div>
+                    </div>
+                </div>
+
+                <div >
+                    <div id="contentTask" data-spy="scroll" style=" position:relative; max-height: 580px; overflow-y:auto;">
+
+
+                        <div class="row-3 text-primary d-flex justify-content-center align-items-center" style="min-height: 520px;">
+                            <div class="col-4">
+                                <img src="public/img/icons/empty.png" style="opacity: 0.3;" width="220px" height="200px">
+                            </div>
+
+                            <div class="col-6 text-primary ">
+                                <p class="font-weight-bold">
+                                    Que pena, não há anotações para mostrar :(
+                                </p> 
+                                <br>
+                                > Crie uma tarefa clicando no botão +
+                                <br>
+                                > Selecione uma tarefa existente na lista ao lado
+                            </div>
+        
+                        </div>  
+                    </div>
+                </div>
+                </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <br>
+        <h6 class="text-light">by Matheus Phelipe</h6>
+    </div>   
+    
+            <!--MODAL DINÂMICO-->
+            <div id="addTask" class="modal fade">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class ="modal-content">
+                        <!--Título/cabeçalho do modal-->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Inserir nova tarefa</h4>
+                            <button class="close" data-dismiss="modal" arial-label="Fechar">X</button>
+                            <!--<span aria-hidden="true">&times;</span>-->
+                        </div>
+                        <!--Conteúdo do modal-->
+                        <div class="modal-body"> 
+                            <div class="row">
+                                <div class="col-3 text-bold">
+                                    Nome
+                                </div>
+                                <div class="col-9">
+                                    <input  id="task-name" type="text" name="Ex: comprar sapatos" class="form-control">
+                                </div>
+
+                            </div>
+                            <br>
+                        </div>
+    
+                        <!--Rodapé-->
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button id="adicionar" data-dismiss="modal" class="btn btn-primary">Concluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+                    <!--MODAL SIMPLES-->
+        <div id="endTask" class="modal fade">
+            <div class="modal-dialog modal-sm">
+                <!--modal-sm, lg e xl para mudar o tamanho dos modais-->
+                <div class ="modal-content">
+                    <!--Título/cabeçalho do modal-->
+                    <div class="modal-header">
+                        <h4>Marcar tarefa como concluída?</h4>
+                        <button class="close" data-dismiss="modal" arial-label="Fechar">X</button>
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    </div>
+                    <!--Conteúdo do modal-->
+                    <div class="modal-body">
+                        Você poderá desfazer essa ação depois.
+                    </div>
+
+                    <!--Rodapé-->
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button class="btn btn-primary">Concluir</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="delete" class="modal fade">
+            <div class="modal-dialog modal-sm">
+                <!--modal-sm, lg e xl para mudar o tamanho dos modais-->
+                <div class ="modal-content">
+                    <!--Título/cabeçalho do modal-->
+                    <div class="modal-header">
+                        <h4>Excluir tarefa?</h4>
+                        <button class="close" data-dismiss="modal" arial-label="Fechar">X</button>
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    </div>
+                    <!--Conteúdo do modal-->
+                    <div class="modal-body">
+                        A operação não pode ser desfeita.
+                    </div>
+                    <!--Rodapé-->
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                        <button id="removeTask" data-dismiss="modal" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <script src="toDo.js"></script>
+
+</body>
+</html>

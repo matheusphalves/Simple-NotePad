@@ -1,0 +1,20 @@
+.main{
+    background-color: rgb(255, 255, 255); 
+    border-radius: 3%;
+    padding: 10px;
+    margin-top: 20px;
+    min-height: 650px;
+    max-height: 650px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.botoes{
+    margin: 5px;
+}
+
+.items{
+position: relative;
+min-width: auto;
+padding: 0px;
+padding-right: 5px;
+}
