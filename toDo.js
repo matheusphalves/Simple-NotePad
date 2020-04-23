@@ -1,4 +1,5 @@
-class User{
+//---------------------------------CLASSES E VARIÁVEIS GLOBAIS
+class User{ //usuário do sistema, contendo um nome e uma lista de atividades
     constructor(name){
         this.name = name;
         this.listTasks = [];
@@ -8,7 +9,7 @@ class User{
     }
 }
 
-class Task{
+class Task{//classe referente a uma única atividade, possuindo um nome, texto e sua data de criação/modificação
     constructor(name, text, date){
         this.name = name;
         this.text = text;
@@ -16,10 +17,11 @@ class Task{
     }
 }
 
-//usuário que terá suas próprias atividades
-var user = new User("Default-user")
-//Adicionar elemento em lista
-$("#adicionar").click(function() {
+var user = new User("Default-user")//usuário que terá suas próprias atividades
+
+
+//---------------------------------MÉTODOS DE CRUD
+$("#adicionar").click(function() {//Adicionar elemento em lista
     var name = $("#task-name").val()//obtenho o nome da tarefa
     if(name.length!=0){
         var newTask = new Task(name, " ", new Date()); //criando nova tarefa
@@ -30,33 +32,9 @@ $("#adicionar").click(function() {
     }else{
         alert("Você não pode criar uma tarefa sem nome!")
     }
- 
 })
 
-function saveStorage() {
-    localStorage.setItem("users", JSON.stringify(user.listTasks))
-}
-
-
-$('#task-search').keyup(function(){
-    var search = $("#task-search").val().toUpperCase();
-
-    found = user.listTasks.filter(function(el) {
-        return el.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
-    })
-
-    if(found.length!=0){
-        updateTask(found)
-    }
-});
-
-$("#refresh").click(function () {
-    $("#task-search").val("")
-    updateTask(null);
-})
-
-//Remover elemento em lista
-$("#removeTask").click(function() {
+$("#removeTask").click(function() {//Remover elemento em lista
     var title = $("#titleTask").text();
     var text = $("#contentTask").text();
     var index = -1;
@@ -66,25 +44,38 @@ $("#removeTask").click(function() {
             break;
         }
     }
-    if(index!=-1) {
+    if(index!=-1)
         user.listTasks.splice(index,1);
-    }
     updateTask(null);
     topContent(0);//exibição do primeiro item da lista no painel
     saveStorage()
 });
 
 
-$("#removeData").click(function () { //lista de tarefas é removida do localStorage
-    localStorage.removeItem("users")
-    user.listTasks = JSON.parse(localStorage.getItem("users") || '[]')
-    alert("Dados deletados!")
+
+
+//---------------------------------MÉTODOS PARA FUNCIONALIDADES
+
+
+$('#task-search').keyup(function(){//sempre que digitar no input, efetuar busca por caracteres em comum com os títulos das tarefas
+    var search = $("#task-search").val().toUpperCase();
+
+    found = user.listTasks.filter(function(el) {
+        return el.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
+    })
+    if(found.length!=0)
+        updateTask(found)
+});
+
+$("#refresh").click(function () {//método atualiza a lista de tarefas
+    $("#task-search").val("")
+    updateTask(null);
 })
 
-//sempre que digitar no text área, salvar na variável
-$('#contentTask').keyup(function(){
+$('#contentTask').keyup(function(){//sempre que digitar no text área, salvar na respectiva variável
     var title = $("#titleTask").text();
     var text = $("#contentText").val();
+
     for(var i=0; i<user.listTasks.length; i++){
         if(user.listTasks[i].name==title){
             var task = new Task(title, text, new Date())
@@ -97,7 +88,7 @@ $('#contentTask').keyup(function(){
     updateTask(null);
 })
 
-function updateTask(taskList) {
+function updateTask(taskList) {//método recebe uma lista de tarefas para exibição no scroll lateral do app. Caso informe "null", será usada a lista do usuário
 
     taskList = taskList==null? user.listTasks : taskList;
 
@@ -134,24 +125,15 @@ function updateTask(taskList) {
 
 }
 
-//função para elementos criados dinamicamente
-$(function () {
-    user.listTasks = JSON.parse(localStorage.getItem("users") || '[]') //recepção da lista armazenada no local storage, caso ela exista
-
-    for(var i=0; i<user.listTasks.length;i++)
-        user.listTasks[i].date = Date(user.listTasks[i].date) 
-
-    updateTask(null);
-    //Usuário clicou em tarefa
-    $("#livro").on('click','.task',function() {
-        $("#task-search").val("")
-        var id = $(this).attr("id") 
-        topContent(id);
-        console.log(id)
-    });
+    
+$("#livro").on('click','.task',function() {//Usuário clicou em tarefa
+    $("#task-search").val("")
+    var id = $(this).attr("id") //recebo o id da tarefa selecionada
+    topContent(id);
+    console.log(id)
 });
 
-function topContent(id) {
+function topContent(id) {//seleciona um conteúdo da lista de tarefas por meio de um id e insere as informações para edição
     if(user.listTasks.length!=0){
         $("#titleTask").text(user.listTasks[id].name);
         var date = user.listTasks[id].date
@@ -162,3 +144,23 @@ function topContent(id) {
         <img src="public/img/icons/trash.png" width="30px" height="30px" alt="adicionar nova tarefa"></button>`)
     }
 }
+
+//---------------------------------MÉTODOS DE ARMAZENAMENTO
+
+function loadContent() { //uma forma de salvamento de dados. Conteudo é carregado por meio do objeto localStorage
+    user.listTasks = JSON.parse(localStorage.getItem("users") || '[]') //recepção da lista armazenada no local storage, caso ela exista
+    var i=0;
+    for (task in user.listTasks)//criação de objeto do tipo Date por meio do conteúdo toString armazenado do atributo data
+        task = Date(task.date) 
+    updateTask(null);
+}
+
+function saveStorage() {
+    localStorage.setItem("users", JSON.stringify(user.listTasks))
+}
+
+$("#removeData").click(function () { //lista de tarefas é removida do localStorage
+    localStorage.removeItem("users")
+    user.listTasks = JSON.parse(localStorage.getItem("users") || '[]')
+    alert("Dados deletados!")
+})
