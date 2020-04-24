@@ -18,7 +18,7 @@
 - Search notes;
 - Multiple users (manager user system not implemented!)
 
-###### What do you can do?
+###### What can I do?
 
 - Implement a login system
 - Use a database (here, there is just one user and your changes are saved in localStorage object)
