@@ -97,7 +97,7 @@ function updateTask(taskList) {//método recebe uma lista de tarefas para exibi�
 
         for(var i=0; i<taskList.length; i++){
             var name = taskList[i].name.length > 25? taskList[i].name.substring(0,25) + "...": taskList[i].name; 
-            $("#livro").append(`<a id = ${i} class="task list-group-item list-group-item-action font-weight-bold"  data-toggle= "tooltip" title ="Atividade número 01"  data-placement="top"href="#c2">
+            $("#livro").append(`<a id = ${i} class="task list-group-item list-group-item-action font-weight-bold"  data-toggle= "tooltip" title =""  data-placement="top"href="#c2">
             ${name}
             </a>`)
         }
@@ -137,7 +137,7 @@ function topContent(id) {//seleciona um conteúdo da lista de tarefas por meio d
     if(user.listTasks.length!=0){
         $("#titleTask").text(user.listTasks[id].name);
         var date = user.listTasks[id].date
-        var texto = `<textarea id="contentText" class="form-control" style="min-height: 550px; resize:none;">${user.listTasks[id].text}</textarea>`
+        var texto = `<textarea id="contentText" class="form-control" style="min-height: 530px; resize:none;">${user.listTasks[id].text}</textarea>`
         $("#contentTask").html(texto);
         $("#dateTask").text(  `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} - ` +  `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}` )
         $("#opcoes").html(`<button  id="btn-delete" class="btn btn-light" data-toggle="modal" data-target="#delete">
@@ -147,11 +147,18 @@ function topContent(id) {//seleciona um conteúdo da lista de tarefas por meio d
 
 //---------------------------------MÉTODOS DE ARMAZENAMENTO
 
+
+$(function () {
+    loadContent();
+})
+
 function loadContent() { //uma forma de salvamento de dados. Conteudo é carregado por meio do objeto localStorage
     user.listTasks = JSON.parse(localStorage.getItem("users") || '[]') //recepção da lista armazenada no local storage, caso ela exista
     var i=0;
-    for (task in user.listTasks)//criação de objeto do tipo Date por meio do conteúdo toString armazenado do atributo data
-        task = Date(task.date) 
+
+    for(i=0; i<user.listTasks.length; i++){//criação de objeto do tipo Date por meio do conteúdo toString armazenado do atributo data
+       user.listTasks[i].date = new Date(user.listTasks[i].date)
+    }
     updateTask(null);
 }
 
