@@ -3,7 +3,7 @@
 
 ![](/images/02.png)
 
-###### Frameworks requeriments
+###### Frameworks/Libraries requeriments
 
 - Bootstrap 4+ (https://getbootstrap.com/docs/4.4/getting-started/download/)
 - Jquery (https://jquery.com/download/)
